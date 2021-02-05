@@ -9,6 +9,7 @@ namespace CommunityForums.Models
     public class PostDetail
     {
         public int PostId { get; set; }
+        public string Title { get; set; }
         public string Content { get; set; }
         public DateTimeOffset CreatedUtc { get; set; }
         public DateTimeOffset? ModifiedUtc { get; set; }

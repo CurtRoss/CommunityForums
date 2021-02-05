@@ -25,9 +25,9 @@ namespace CommunityForums.Services
                 {
                     OwnerId = _userId,
                     UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name,
+                    Title = model.Title,
                     Content = model.Content,
                     CreateUtc = DateTimeOffset.Now
-
                 };
             using (var ctx = new ApplicationDbContext())
             {
@@ -50,12 +50,64 @@ namespace CommunityForums.Services
                                 {
                                     PostId = e.PostId,
                                     UserName = e.UserName,
+                                    Title = e.Title,
                                     CreatedUtc = e.CreateUtc,
                                     ModifiedUtc = e.ModifiedUtc,
                                     Content = e.Content
                                 }
                     );
                 return query.ToArray();
+            }
+        }
+
+        public PostDetail GetPostByid(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Posts
+                        .Single(e => e.PostId == id && e.OwnerId == _userId);
+                return
+                    new PostDetail
+                    {
+                        PostId = entity.PostId,
+                        Title = entity.Title,
+                        Content = entity.Content,
+                        CreatedUtc = entity.CreateUtc,
+                        ModifiedUtc = entity.ModifiedUtc
+                    };
+            }
+        }
+
+        public bool UpdatePost(PostEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Posts
+                        .Single(e => e.PostId == model.PostId && e.OwnerId == _userId);
+
+                entity.Title = model.Title;
+                entity.Content = model.Content;
+                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool DeletePost(int id)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Posts
+                        .Single(e => e.PostId == id && e.OwnerId == _userId);
+
+                ctx.Posts.Remove(entity);
+                return ctx.SaveChanges() == 1;
             }
         }
     }
