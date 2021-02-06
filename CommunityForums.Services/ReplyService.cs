@@ -53,5 +53,40 @@ namespace CommunityForums.Services
                 return query.ToArray();
             }
         }
+
+        public ReplyDetail GetReplyById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Replies
+                        .Single(e => e.ReplyId == id && e.OwnerId == _userId);
+                return
+                    new ReplyDetail
+                    {
+                        ReplyId = entity.ReplyId,
+                        Content = entity.Content,
+                        CreatedUtc = entity.CreateUtc,
+                        ModifiedUtc = entity.ModifiedUtc
+                    };
+            }
+        }
+
+        public bool UpdateReply(ReplyEdit model)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Replies
+                        .Single(e => e.ReplyId == model.ReplyId && e.OwnerId == _userId);
+
+                entity.Content = model.Content;
+                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }

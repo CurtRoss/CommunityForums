@@ -40,5 +40,25 @@ namespace CommunityForums.WebAPI.Controllers
 
             return Ok();
         }
+
+        public IHttpActionResult Get(int id)
+        {
+            ReplyService replyService = CreateReplyService();
+            var reply = replyService.GetReplyById(id);
+            return Ok(reply);
+        }
+
+        public IHttpActionResult Put(ReplyEdit reply)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateReplyService();
+
+            if (!service.UpdateReply(reply))
+                return InternalServerError();
+
+            return Ok();
+        }
     }
 }
