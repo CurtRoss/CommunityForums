@@ -28,8 +28,11 @@ namespace CommunityForums.Services
                     CreateUtc = DateTimeOffset.Now,
                     CommentId = model.CommentId
                 };
+
             using (var ctx = new ApplicationDbContext())
             {
+                var comment = ctx.Comments.Find(entity.CommentId);
+                comment.ListOfReplies.Add(entity);
                 ctx.Replies.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
@@ -77,7 +80,7 @@ namespace CommunityForums.Services
 
         public bool UpdateReply(ReplyEdit model)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx

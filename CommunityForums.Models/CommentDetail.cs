@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityForums.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,9 @@ namespace CommunityForums.Models
     {
         public int Id { get; set; }
         public string Text { get; set; }
+        public List<Reply> ListOfReplies { get; set; } = new List<Reply>();
 
-       
+
         public DateTimeOffset CreateUtc { get; set; }
         public DateTimeOffset? ModifiedUtc { get; set; }
     }
