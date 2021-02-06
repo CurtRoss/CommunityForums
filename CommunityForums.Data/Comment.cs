@@ -25,6 +25,7 @@ namespace CommunityForums.Data
 
         [Required]
         public Guid OwnerId { get; set; }
+        public virtual List<Reply> ListOfReplies { get; set; } = new List<Reply>();
 
         [Required]
         public DateTimeOffset CreateUtc { get; set; }

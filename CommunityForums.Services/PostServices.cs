@@ -74,7 +74,8 @@ namespace CommunityForums.Services
                         Title = entity.Title,
                         Content = entity.Content,
                         CreatedUtc = entity.CreateUtc,
-                        ModifiedUtc = entity.ModifiedUtc
+                        ModifiedUtc = entity.ModifiedUtc,
+                        ListOfComments = entity.ListOfComments
                     };
             }
         }
