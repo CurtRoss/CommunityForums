@@ -53,7 +53,6 @@ namespace CommunityForums.Services
                                     Title = e.Title,
                                     CreatedUtc = e.CreateUtc,
                                     ModifiedUtc = e.ModifiedUtc,
-                                    Content = e.Content
                                 }
                     );
                 return query.ToArray();

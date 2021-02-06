@@ -61,11 +61,11 @@ namespace CommunityForums.WebAPI.Controllers
             return Ok();
         }
 
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult Delete(int Postid)
         {
             var service = CreatePostService();
 
-            if (!service.DeletePost(id))
+            if (!service.DeletePost(Postid))
                 return InternalServerError();
 
             return Ok();
