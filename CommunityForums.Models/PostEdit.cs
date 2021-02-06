@@ -8,6 +8,7 @@ namespace CommunityForums.Models
 {
     public class PostEdit
     {
+        public string Title { get; set; }
         public int PostId { get; set; }
         public string Content { get; set; }
 
