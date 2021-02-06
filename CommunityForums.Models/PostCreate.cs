@@ -15,5 +15,7 @@ namespace CommunityForums.Models
         public string Content { get; set; }
         public string UserName { get; set; }
 
+        
+
     }
 }

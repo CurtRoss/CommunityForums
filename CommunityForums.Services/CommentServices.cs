@@ -29,8 +29,12 @@ namespace CommunityForums.Services
                      PostId = model.PostId,
                      CreateUtc = DateTimeOffset.Now
                  };
+
+            
             using (var ctx = new ApplicationDbContext())
             {
+                var post = ctx.Posts.Find(entity.PostId);
+                post.ListOfComments.Add(entity);
                 ctx.Comments.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
@@ -71,7 +75,8 @@ namespace CommunityForums.Services
                         Id = entity.Id,
                         Text = entity.Text,
                         CreateUtc = entity.CreateUtc,
-                        ModifiedUtc = entity.ModifiedUtc
+                        ModifiedUtc = entity.ModifiedUtc,
+                        ListOfReplies = entity.ListOfReplies
                     };
             }
 

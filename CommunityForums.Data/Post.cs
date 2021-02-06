@@ -21,6 +21,7 @@ namespace CommunityForums.Data
         public string UserName { get; set; }
 
         public string Content { get; set; }
+        public virtual List<Comment> ListOfComments { get; set; } = new List<Comment>();
 
         [Required]
         public DateTimeOffset CreateUtc { get; set; }

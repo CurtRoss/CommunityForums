@@ -68,5 +68,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommunityForums.Data\CommunityForums.Data.csproj">
+      <Project>{3f60397b-01b6-43c8-bccb-a7819e30d431}</Project>
+      <Name>CommunityForums.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
