@@ -23,6 +23,7 @@ namespace CommunityForums.Services
                 new Reply()
                 {
                     OwnerId = _userId,
+                    UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name,
                     Content = model.Content,
                     CreateUtc = DateTimeOffset.Now
                 };
@@ -89,7 +90,7 @@ namespace CommunityForums.Services
             }
         }
 
-        public bool DeleteNote(int replyId)
+        public bool DeleteReply(int replyId)
         {
             using (var ctx = new ApplicationDbContext())
             {
