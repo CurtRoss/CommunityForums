@@ -88,5 +88,20 @@ namespace CommunityForums.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public bool DeleteNote(int replyId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Replies
+                        .Single(e => e.ReplyId == replyId && e.OwnerId == _userId);
+
+                ctx.Replies.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }

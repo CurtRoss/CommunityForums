@@ -60,5 +60,15 @@ namespace CommunityForums.WebAPI.Controllers
 
             return Ok();
         }
+
+        public IHttpActionResult Delete(int id)
+        {
+            var service = CreateReplyService();
+
+            if (!service.DeleteNote(id))
+                return InternalServerError();
+
+            return Ok();
+        }
     }
 }
