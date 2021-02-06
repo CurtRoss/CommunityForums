@@ -23,9 +23,10 @@ namespace CommunityForums.Services
                 new Reply()
                 {
                     OwnerId = _userId,
-                    UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name,
+                    UserName = model.UserName,
                     Content = model.Content,
-                    CreateUtc = DateTimeOffset.Now
+                    CreateUtc = DateTimeOffset.Now,
+                    CommentId = model.CommentId
                 };
             using (var ctx = new ApplicationDbContext())
             {

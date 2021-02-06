@@ -12,5 +12,8 @@ namespace CommunityForums.Models
         [Required, MinLength(2, ErrorMessage = "Please enter at least two characters.")]
         [MaxLength(500, ErrorMessage = "There are too many characters in this field.")]
         public string Text { get; set; }
+        public string Author { get; set; }
+        [Required]
+        public int PostId { get; set; }
     }
 }

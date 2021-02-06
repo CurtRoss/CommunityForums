@@ -24,8 +24,9 @@ namespace CommunityForums.Services
                  new Comment()
                  {
                      OwnerId = _userId,
-                     Author = System.Security.Principal.WindowsIdentity.GetCurrent().Name,
+                     Author = model.Author,
                      Text = model.Text,
+                     PostId = model.PostId,
                      CreateUtc = DateTimeOffset.Now
                  };
             using (var ctx = new ApplicationDbContext())
@@ -50,7 +51,6 @@ namespace CommunityForums.Services
                                    Author = e.Author,
                                    CreatedUtc = e.CreateUtc,
                                    ModifiedUtc = e.ModifiedUtc,
-                                   Text = e.Text
                                }
                    );
                 return query.ToArray();

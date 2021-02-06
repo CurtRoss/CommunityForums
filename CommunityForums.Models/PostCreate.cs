@@ -13,6 +13,7 @@ namespace CommunityForums.Models
         [Required, MinLength(1, ErrorMessage = "Please enter at least one character.")]
         public string Title { get; set; }
         public string Content { get; set; }
+        public string UserName { get; set; }
 
     }
 }

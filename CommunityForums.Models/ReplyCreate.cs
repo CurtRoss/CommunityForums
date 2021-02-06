@@ -12,5 +12,7 @@ namespace CommunityForums.Models
         [Required]
         [MaxLength(500)]
         public string Content { get; set; }
+        public string UserName { get; set; }
+        public int CommentId { get; set; }
     }
 }

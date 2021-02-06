@@ -65,7 +65,7 @@ namespace CommunityForums.WebAPI.Controllers
         {
             var service = CreateReplyService();
 
-            if (!service.DeleteNote(id))
+            if (!service.DeleteReply(id))
                 return InternalServerError();
 
             return Ok();
