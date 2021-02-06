@@ -5,22 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommunityForums.Data
+namespace CommunityForums.Models
 {
-    public class Reply
+    public class ReplyDetail
     {
-        [Key]
         public int ReplyId { get; set; }
-
-        [Required]
-        public Guid OwnerId { get; set; }
-
-        public string UserName { get; set; }
-
         public string Content { get; set; }
 
-        [Required]
-        public DateTimeOffset CreateUtc { get; set; }
+        [Display(Name = "Created")]
+        public DateTimeOffset CreatedUtc { get; set; }
+        [Display(Name = "Modified")]
         public DateTimeOffset? ModifiedUtc { get; set; }
     }
 }
