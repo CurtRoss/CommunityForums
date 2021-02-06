@@ -14,9 +14,10 @@ namespace CommunityForums.Data
 
         [Required]
         public Guid OwnerId { get; set; }
+
         [Required]
         public string Title { get; set; }
-
+        
         public string UserName { get; set; }
 
         public string Content { get; set; }

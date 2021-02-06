@@ -24,9 +24,9 @@ namespace CommunityForums.Services
                 new Post()
                 {
                     OwnerId = _userId,
-                    UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name,
                     Title = model.Title,
                     Content = model.Content,
+                    UserName = model.UserName,
                     CreateUtc = DateTimeOffset.Now
                 };
             using (var ctx = new ApplicationDbContext())
