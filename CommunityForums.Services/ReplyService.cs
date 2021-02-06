@@ -9,69 +9,65 @@ using System.Threading.Tasks;
 
 namespace CommunityForums.Services
 {
-    public class PostServices
+    public class ReplyService
     {
         private readonly Guid _userId;
-
-        public PostServices(Guid userId)
+        public ReplyService(Guid userId)
         {
             _userId = userId;
         }
 
-        public bool CreatePost(PostCreate model)
+        public bool CreateReply(ReplyCreate model)
         {
             var entity =
-                new Post()
+                new Reply()
                 {
                     OwnerId = _userId,
-                    Title = model.Title,
-                    Content = model.Content,
                     UserName = model.UserName,
-                    CreateUtc = DateTimeOffset.Now
+                    Content = model.Content,
+                    CreateUtc = DateTimeOffset.Now,
+                    CommentId = model.CommentId
                 };
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Posts.Add(entity);
+                ctx.Replies.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
 
-        public IEnumerable<PostListItem> GetPosts()
+        public IEnumerable<ReplyListItem> GetReplies()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
-                        .Posts
+                        .Replies
                         .Where(e => e.OwnerId == _userId)
                         .Select(
                             e =>
-                                new PostListItem
+                                new ReplyListItem
                                 {
-                                    PostId = e.PostId,
+                                    ReplyId = e.ReplyId,
                                     UserName = e.UserName,
-                                    Title = e.Title,
-                                    CreatedUtc = e.CreateUtc,
-                                    ModifiedUtc = e.ModifiedUtc,
+                                    CreateUtc = e.CreateUtc
                                 }
-                    );
+                            );
                 return query.ToArray();
             }
         }
 
-        public PostDetail GetPostByid(int id)
+        public ReplyDetail GetReplyById(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                        .Posts
-                        .Single(e => e.PostId == id && e.OwnerId == _userId);
+                        .Replies
+                        .Single(e => e.ReplyId == id && e.OwnerId == _userId);
                 return
-                    new PostDetail
+                    new ReplyDetail
                     {
-                        PostId = entity.PostId,
-                        Title = entity.Title,
+                        ReplyId = entity.ReplyId,
                         Content = entity.Content,
                         CreatedUtc = entity.CreateUtc,
                         ModifiedUtc = entity.ModifiedUtc
@@ -79,16 +75,15 @@ namespace CommunityForums.Services
             }
         }
 
-        public bool UpdatePost(PostEdit model)
+        public bool UpdateReply(ReplyEdit model)
         {
-            using (var ctx = new ApplicationDbContext())
+            using(var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                        .Posts
-                        .Single(e => e.PostId == model.PostId && e.OwnerId == _userId);
+                        .Replies
+                        .Single(e => e.ReplyId == model.ReplyId && e.OwnerId == _userId);
 
-                entity.Title = model.Title;
                 entity.Content = model.Content;
                 entity.ModifiedUtc = DateTimeOffset.UtcNow;
 
@@ -96,16 +91,17 @@ namespace CommunityForums.Services
             }
         }
 
-        public bool DeletePost(int id)
+        public bool DeleteReply(int replyId)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                        .Posts
-                        .Single(e => e.PostId == id && e.OwnerId == _userId);
+                        .Replies
+                        .Single(e => e.ReplyId == replyId && e.OwnerId == _userId);
 
-                ctx.Posts.Remove(entity);
+                ctx.Replies.Remove(entity);
+
                 return ctx.SaveChanges() == 1;
             }
         }

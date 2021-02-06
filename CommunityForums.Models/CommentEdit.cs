@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace CommunityForums.Models
 {
-    public class PostEdit
+    public class CommentEdit
     {
-        public string Title { get; set; }
-        public int PostId { get; set; }
-        public string Content { get; set; }
-
+        public int Id { get; set; }
+        public string Text { get; set; }
     }
 }

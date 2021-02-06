@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace CommunityForums.Models
 {
-    public class PostCreate
+    public class ReplyCreate
     {
-
-        [Required, MinLength(1, ErrorMessage = "Please enter at least one character.")]
-        public string Title { get; set; }
+        [Required]
+        [MaxLength(500)]
         public string Content { get; set; }
         public string UserName { get; set; }
-
+        public int CommentId { get; set; }
     }
 }
