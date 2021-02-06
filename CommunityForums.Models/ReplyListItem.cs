@@ -9,10 +9,11 @@ namespace CommunityForums.Models
 {
     public class ReplyListItem
     {
-        [Required]
+        public int ReplyId { get; set; }
+
         public string UserName { get; set; }
 
-        [Required]
+
         [Display(Name ="Reply Date")]
         public DateTimeOffset CreateUtc { get; set; }
 
