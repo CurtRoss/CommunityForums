@@ -10,5 +10,9 @@ namespace CommunityForums.Models
     {
         public int Id { get; set; }
         public string Text { get; set; }
+
+       
+        public DateTimeOffset CreateUtc { get; set; }
+        public DateTimeOffset? ModifiedUtc { get; set; }
     }
 }
